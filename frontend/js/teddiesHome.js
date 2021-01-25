@@ -25,9 +25,7 @@ function getAllTeddies() {
 
 function addTeddiescard(datas){//Modifier le dom avec les données api et générer la card #teddyCard
 
-  for (teddy of datas){// boucler les donnees pour chaque oursons
-    // creer une card pour chaque oursons
-
+  for (teddy of datas){// boucler les donnees pour chaque card oursons
     var idcard= document.getElementById("teddyCard");
 
     var div = document.createElement("div");

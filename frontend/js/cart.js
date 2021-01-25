@@ -76,9 +76,11 @@ showCart()
 
 // au clic sur le btn envoyer la commande
 btnCartSend.addEventListener('click', function(){
+	
 	checkInput();// on verifie le format des input
 	sendToApi(); // on envoi les donnees a l'api et on recuperer le num de commande
 	//si tout est ok on affiche le modal avec un num de commande et le prix total
+	
     //window.location="confirm.html "
 })
 
@@ -217,7 +219,7 @@ function checkInput(){
      }
 
 		 console.log("toutes les donnees clients sont ok")
-         sendToApi();
+     
 
      }
 
