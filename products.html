@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="template bootstrap, modify by fanny JBT">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>orinoco</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="./frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./frontend/style.css">
+  </head>
+  
+<body>
+  <header id="header">
+    <!-- contenu généré par javascript -->
+  </header>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Personnalisez votre teddy </h1>
+    </div>
+  </div>
+  
+<main class="container">
+  <div class="card mx-auto"  >
+    <div class="card-img" id="cardImg"></div>
+    <div class="card-body">
+        <h5 class="card-title" id ="cardTitle"></h5>
+        <h5 class="card-title" id ="cardPrice"></h5>
+        <p class="card-text" id ="cardText"></p>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend"> 
+            <label class="input-group-text" >Couleurs</label>
+          </div>
+          <select class="custom-select" id="cardColor">
+          </select>
+        </div>
+        <a href="#" class="btn btn-secondary btn-block" id ="adTeddyCart" data-toggle="modal" data-target="#modalGoToCart">Ajouter au panier</a>
+    </div>
+  </div>
+ <!-- Modal confirmation cde ou retour achat -->
+
+ <div id="modalGoToCart" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">CONFIRMATION D'AJOUT A VOTRE PANIER</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Cet article a bien été ajouté a votre panier</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" href="teddiesHome.html" role="button">Poursuivre mes achat</a>
+        <a class="btn btn-primary" href="cart.html" role="button">Aller au panier</a>
+      </div>
+    </div>
+  </div>
+</div>
+   
+       
+</main>
+  <footer id="footer">
+  </footer>
+  <script src="./frontend/js/layout/header.js"></script>
+  <script src="./frontend/js/layout/footer.js"></script>
+  <script src="./frontend/js/product.js"></script>
+  <!-- <script src="test.js"></script> -->
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+        <script src="./frontend/bootstrap/js/bootstrap.bundle.js"></script>
+      </body>
+  </html>

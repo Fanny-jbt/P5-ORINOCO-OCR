@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="template bootstrap, modify by fanny JBT">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>orinoco</title>
+
+    
+   
+<!-- Bootstrap core CSS -->
+<link href="./frontend/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="./frontend/style.css">
+<script src="https://kit.fontawesome.com/cbb6e357e7.js" crossorigin="anonymous"></script>
+  </head>
+  
+<body>
+ <header id="header">
+    <!-- contenu généré par javascript -->
+  </header>
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Récapitulatif du Panier </h1>
+    </div>
+  </div>
+  
+  
+  <main class="container">
+    <section class="table" id="table">
+      <h2 id ="tableTitle">Mon panier</h2>
+
+      <table class="table" id ="tableCart" >
+        <thead class="table  table-dark">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Produit</th>
+            <th scope="col">Couleur</th>
+            <th scope="col">Prix unitaire</th>
+            <th scope="col">QTE</th>
+            <th scope="col">supprimer</th> 
+          </tr>
+        </thead>
+        <tbody class ="table table-hover" id ="tableCartRows">
+ <!-- texte generer en javascript -->
+
+        </tbody>
+        <tfoot class="table table-hover" id="tableFoot">
+          
+        </tfoot>
+    </table>
+    </section>
+
+      <!-- Modal confirmation cde ou retour achat -->
+    <section id="modalDelated" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">ARTICLE SUPPRIME </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Cet article a bien été supprimer de votre panier</p>
+            </div>
+            <div class="modal-footer">
+              <a class="btn btn-primary" href="cart.html" role="button">retour au panier</a>
+            </div>
+          </div>
+      </div>
+
+
+    </section>
+    <section class="form" id="form">
+      <H2>MES COORDONNEES</H2>
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputFristName">Prénom</label>
+            <input type="text" class="form-control" id="inputFristName">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputLastName">Nom</label>
+            <input type="text" class="form-control" id="inputLastName">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Addresse</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        </div>
+        <div class="form-row"> 
+          <div class="form-group col-md-4">
+            <label for="inputZip">code postal</label>
+            <input type="text" class="form-control" id="inputZip" pattern="[0-9]{5}">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="inputCity">Ville</label>
+            <input type="text" class="form-control" id="inputCity">
+          </div>
+          <div class="form-group col-md-8">
+            <label for="InputMail">Email</label>
+            <input type="email" class="form-control" id="InputMail" placeholder="name@example.com">
+          </div>
+        </div>
+      
+        
+      </form>
+    </section>
+
+    <section class="send">
+ 
+ <!-- Button  modal -->
+<button type="button" id= "btnCartSend" class="btn btn-primary" >  <!-- data-toggle="modal" data-target="#exampleModal" -->
+  Valider la commande
+</button>
+
+    </section>
+  </main>
+</body>
+
+
+<footer id="footer">
+    
+  </footer>
+  <script src="./frontend/js/layout/header.js"></script>
+  <script src="./frontend/js/layout/footer.js"></script>
+  <script src="./frontend/js/cart.js"></script>
+  <!-- <script src="test.js"></script> -->
+  
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+  <script src="./frontend/bootstrap/js/bootstrap.bundle.js"></script>
+      </body>
+  </html>
+  
