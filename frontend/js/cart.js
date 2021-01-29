@@ -1,7 +1,7 @@
 
 //déclaration des variables
 let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));  // recuperer le panier convertit en javascript
-console.log('shoppingCart',shoppingCart)
+console.log('shoppingCart',shoppingCart )
 let orderInfos = localStorage.getItem('orderInfos');  // recuperer le retour API convertit en javascript
 console.log('orderInfos',orderInfos)
 
@@ -29,7 +29,7 @@ let email = document.getElementById("InputMail").value;
 function showCart(){
 //au chargement de la page génerer dynamiquement le panier si shoppingcart est plein sinon on affiche panier vide avec bouton de retour a teddiesHome.html
 onloadcartNumbers()
-		if (shoppingCart && shoppingCart == undefined || shoppingCart && shoppingCart == null ) {
+		if (!shoppingCart || Object.keys( shoppingCart).length == 0 ) {
 			// on masque le cart le formulaire et son bouton et on affiche un retour à la page des produits
 			
 			tableTitle.style.display = "none";
@@ -51,13 +51,14 @@ onloadcartNumbers()
 			a.setAttribute('role','button');
 			a.textContent = "Continuer mes achats";
 
-			}else{
-				if (shoppingCart){
-					totalCartPrice ();// total price du panier
-					createTableCart();  //sinon afficher le panier
-				}
+		 	}else{
+		// 		if (shoppingCart){
+		 			totalCartPrice ();// total price du panier
+					 createTableCart();  //sinon afficher le panier
+					 
+		 		}
 		
-		}
+		// }
 }
 showCart()
 
@@ -69,9 +70,9 @@ showCart()
 	bntDelated[i].addEventListener("click", function(){ // au clic sur sup on suprimer le teddy coorepondant dans le shopping cart
 			let index = Array.from(bntDelated).indexOf(event.target) ;
 			console.log("click pour suprimer envoi l'index, ",index);
-			let idTeddy =Object.keys(shoppingCart)[index];
-			console.log("click pour suprimer envoi l'idteddy ",idTeddy);
-			delateItemCart(index,idTeddy );
+			 let idTeddy =Object.keys(shoppingCart)[index];
+			 console.log("click pour suprimer envoi l'idteddy ",idTeddy);
+			delateItemCart(index,idTeddy);
 
 			})
  }
@@ -86,20 +87,30 @@ btnCartSend.addEventListener('click', function(){
     //window.location="confirm.html "
 })
 
-function delateItemCart(idTeddy){
-//supprimer un teddy en fonction de son index dans teddyArray
-	console.log("idTeddy sup",idTeddy)
-  //on recupere  le teddy et on supprime
-	 delete shoppingCart[idTeddy]
-  // on vide le localStorage
-	 localStorage.removeItem("shoppingCart");
-  //on met a jour le localStorage
-	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;
-  // on met a jour le prix
-	 totalCartPrice ()
-  // on recharge la page 
-	 window.location.reload()
+function delateItemCart(index,idTeddy){
+	//supprimer un teddy en fonction de son index dans teddyArray
+	console.log("index",index)
+	console.log("idTeddy",idTeddy)
 
+	//on recupere  le teddy et on supprime
+  console.log("fonction  shopping cart",Object.values(shoppingCart));
+   console.log("fonction Teddy avant sup",Object.values(shoppingCart)[index])
+   console.log("fonction Teddy avant sup",shoppingCart[idTeddy])
+  	 delete shoppingCart[idTeddy]
+ 	  console.log("fonction Teddy apres sup",shoppingCart)
+  // on vide le localStorage
+ localStorage.removeItem("shoppingCart");
+   //on met a jour le localStorage
+	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;
+//    // on met a jour le prix
+	  totalCartPrice ()
+	  
+// mettre a jour la qte span cart quand on delate un item
+	  
+
+  // on recharge la page 
+ 	 window.location.reload()
+ 
  }
 
 function totalCartPrice (){
@@ -293,7 +304,8 @@ function onloadcartNumbers(){
 	 
   if(productQte){
         productSpan.textContent=productQte;
-      }
+	  }
+	 // mettre a jour la qte quand on delate un item
 }
 
   
