@@ -30,6 +30,7 @@ function showCart(){
 //au chargement de la page génerer dynamiquement le panier si shoppingcart est plein sinon on affiche panier vide avec bouton de retour a teddiesHome.html
 		if (shoppingCart && shoppingCart == undefined || shoppingCart && shoppingCart == null ) {
 			// on masque le cart le formulaire et son bouton et on affiche un retour à la page des produits
+			
 			tableTitle.style.display = "none";
 			tableCart.style.display = "none";
 			form.style.display = "none";
@@ -52,7 +53,7 @@ function showCart(){
 			}else{
 				if (shoppingCart){
 					totalCartPrice ();// total price du panier
-					createTableCart();  //sinon afficher le panie
+					createTableCart();  //sinon afficher le panier
 				}
 		
 		}
@@ -84,7 +85,7 @@ btnCartSend.addEventListener('click', function(){
     //window.location="confirm.html "
 })
 
-function delateItemCart(index,idTeddy){
+function delateItemCart(idTeddy){
 //supprimer un teddy en fonction de son index dans teddyArray
 	
   //on recupere  le teddy et on supprime
@@ -199,28 +200,27 @@ function createTableCart(){// on affiche dynamiquement le panier sous forme de t
 
 function checkInput(){
 // on verifie si les champs sont remplit sionon on affiche un messge d'alerte
-     if (fristName.length == 0){
+     if (fristName.length === 0){
  	   	return alert("Merci de renseigner votre prénom");
 	 }
-	  if(lastName.length == 0){
+	  if(lastName.length === 0){
  	  	return alert("Merci de renseigner votre nom");
 	 }
-	 if(address.length == 0){
+	 if(address.length === 0){
      	return alert("Merci de renseigner votre adresse");
 	 }
-	 if(zip.length != 5){
+	 if(zip.length !== 5){
      	return alert("Merci de renseigner votre code postal");
 	 }
-	 if(city.length == 0){
+	 if(city.length === 0){
 	 	return alert("Merci de renseigner votre ville");
 	 }
-	  if(email.length == 0){
+	  if(email.length === 0){
      	return alert("Merci de renseigner votre email ");
      }
 
 		 console.log("toutes les donnees clients sont ok")
-     
-
+		 //Si toutes les inputs saisies sont valides, renvoie l'objet contact à cartInformation
      }
 
 
@@ -253,7 +253,7 @@ function sendToApi(){
         console.log("send api id",apiCartArray)
     }
 
-
+//...separer ici et mettre en condition le haut dans une nouvelle fonction
 
 // POST API
 	 fetch("http://localhost:3000/api/teddies/order", {
