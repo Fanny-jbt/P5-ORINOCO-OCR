@@ -68,6 +68,7 @@ function setCardItem(){
           price : teddies.price,
           qte : 1,
           colors :colorSelect,
+          incart : 0
       }
     console.log("teddy.colors 1",colorSelect)
       
@@ -105,6 +106,44 @@ function addToCart(product){
               shoppingCart[idproduct] = product
             }
         // on sort du test et on met ajour le local storage
-        localStorage.setItem("shoppingCart",JSON.stringify(shoppingCart))   
+        localStorage.setItem("shoppingCart",JSON.stringify(shoppingCart));   
 }
+
+//  on compte le nombre de prouduits ajouterà l'icone cart en fionction du nb de clic sur btn addTo Cart
+  
+  let btnAddToCart = document.getElementById("adTeddyCart")
+  
+  btnAddToCart.addEventListener("click", ()=>{
+    
+    
+    cartNumbers()
+
+  })
+
+  function cartNumbers(){
+    let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));// recuperer le panier convertit en javascript
+    shoppingCart = Object.values(shoppingCart);
+    console.log("shoppingcart",shoppingCart);
+
+    let productQte = localStorage.getItem("cartQte");
+    console.log("localStorage qte",productQte);
+    productQte=parseInt(productQte);//on convertit le string en number
+    
+    // on verifie que productQte n'est pas vide
+   if(productQte){
+    localStorage.setItem("cartQte",productQte + 1); //on incremente la qte existante
+   }else{
+    localStorage.setItem("cartQte",1);//on met  qte existante à 1
+   }
+   
+
+
+    
+
+  }
+  
+  // }
+  
+ 
+
 

@@ -2,7 +2,7 @@
 //déclaration des variables
 let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));  // recuperer le panier convertit en javascript
 console.log('shoppingCart',shoppingCart)
-let orderInfos = JSON.parse(localStorage.getItem('orderInfos'));  // recuperer le retour API convertit en javascript
+let orderInfos = localStorage.getItem('orderInfos');  // recuperer le retour API convertit en javascript
 console.log('orderInfos',orderInfos)
 
 
@@ -110,6 +110,7 @@ function totalCartPrice (){
 	 localStorage.setItem('totalCart',JSON.stringify(totalCart) );
  }
 }
+
 
 function createTableCart(){// on affiche dynamiquement le panier sous forme de tableau
 
