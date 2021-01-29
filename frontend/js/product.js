@@ -114,36 +114,49 @@ function addToCart(product){
   let btnAddToCart = document.getElementById("adTeddyCart")
   
   btnAddToCart.addEventListener("click", ()=>{
-    
-    
     cartNumbers()
-
   })
 
-  function cartNumbers(){
-    let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));// recuperer le panier convertit en javascript
-    shoppingCart = Object.values(shoppingCart);
-    console.log("shoppingcart",shoppingCart);
+function onloadcartNumbers(){
+  //on recupere la qte stocké dans le local storage et on met a jour la span cart
+  let productQte = localStorage.getItem("cartQte");
+    console.log("localStorage qte",productQte);
+    productQte=parseInt(productQte);//on convertit le string en number
+    
+  let productSpan = document.getElementById("cartNumber");// on selectionne le badge qui contient les qté
+   
+      if(productQte){
+        productSpan.textContent=productQte;
+      }else{
+        localStorage.setItem("cartQte",0);
+        productSpan.textContent=0; 
+      }
+}
 
+  function cartNumbers(){// on modifie les qte en fonction du nombre de clic et on ajoute au localstorage
     let productQte = localStorage.getItem("cartQte");
     console.log("localStorage qte",productQte);
     productQte=parseInt(productQte);//on convertit le string en number
     
-    // on verifie que productQte n'est pas vide
-   if(productQte){
-    localStorage.setItem("cartQte",productQte + 1); //on incremente la qte existante
-   }else{
-    localStorage.setItem("cartQte",1);//on met  qte existante à 1
-   }
+    let productSpan = document.getElementById("cartNumber");// on selectionne le badge qui contient les qté
+    let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));// recuperer le panier convertit en javascript
+   if (shoppingCart){
    
-
-
-    
+    shoppingCart = Object.values(shoppingCart);
+    console.log("shoppingcart",shoppingCart);
+   }
+    // on verifie que productQte n'est pas vide
+        if(productQte){
+          localStorage.setItem("cartQte",productQte + 1); //on incremente la qte existante
+          productSpan.textContent = productQte;
+        }else{
+          localStorage.setItem("cartQte",1);//on met  qte existante à 1
+          productSpan.textContent = 1;
+        }
 
   }
-  
-  // }
-  
+ 
+  onloadcartNumbers()
  
 
 

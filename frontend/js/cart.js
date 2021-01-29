@@ -28,6 +28,7 @@ let email = document.getElementById("InputMail").value;
 
 function showCart(){
 //au chargement de la page génerer dynamiquement le panier si shoppingcart est plein sinon on affiche panier vide avec bouton de retour a teddiesHome.html
+onloadcartNumbers()
 		if (shoppingCart && shoppingCart == undefined || shoppingCart && shoppingCart == null ) {
 			// on masque le cart le formulaire et son bouton et on affiche un retour à la page des produits
 			
@@ -67,17 +68,17 @@ showCart()
  for (i=0 ;i<bntDelated.length ; i++ ){
 	bntDelated[i].addEventListener("click", function(){ // au clic sur sup on suprimer le teddy coorepondant dans le shopping cart
 			let index = Array.from(bntDelated).indexOf(event.target) ;
-			console.log("click pour suprimer envoi l'index, ",index)
-			let idTeddy =Object.keys(shoppingCart)[index]
-			console.log("click pour suprimer envoi lidteddy ",idTeddy)
+			console.log("click pour suprimer envoi l'index, ",index);
+			let idTeddy =Object.keys(shoppingCart)[index];
+			console.log("click pour suprimer envoi l'idteddy ",idTeddy);
 			delateItemCart(index,idTeddy );
+
 			})
  }
 
 
 // au clic sur le btn envoyer la commande
 btnCartSend.addEventListener('click', function(){
-	
 	checkInput();// on verifie le format des input
 	sendToApi(); // on envoi les donnees a l'api et on recuperer le num de commande
 	//si tout est ok on affiche le modal avec un num de commande et le prix total
@@ -87,7 +88,7 @@ btnCartSend.addEventListener('click', function(){
 
 function delateItemCart(idTeddy){
 //supprimer un teddy en fonction de son index dans teddyArray
-	
+	console.log("idTeddy sup",idTeddy)
   //on recupere  le teddy et on supprime
 	 delete shoppingCart[idTeddy]
   // on vide le localStorage
@@ -283,3 +284,17 @@ function sendToApi(){
 }
 
 
+
+function onloadcartNumbers(){
+  //on recupere la qte stocké dans le local storage et on met a jour la span cart
+  let productSpan = document.getElementById("cartNumber");// on selectionne le badge qui contient les qté
+  let productQte = localStorage.getItem("cartQte");
+  productQte=parseInt(productQte);//on convertit le string en number 
+	 
+  if(productQte){
+        productSpan.textContent=productQte;
+      }
+}
+
+  
+ 
