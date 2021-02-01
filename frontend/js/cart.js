@@ -4,7 +4,8 @@ let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));  // recuper
 console.log('shoppingCart',shoppingCart )
 let orderInfos = localStorage.getItem('orderInfos');  // recuperer le retour API convertit en javascript
 console.log('orderInfos',orderInfos)
-
+let cartQte = localStorage.getItem('cartQte');  // recuperer le retour API convertit en javascript
+console.log('cartQte',cartQte)
 
 let form =document.getElementById("form") // formulaire
 let btnCartSend =document.getElementById("btnCartSend") // bouton envoi
@@ -88,26 +89,26 @@ btnCartSend.addEventListener('click', function(){
 })
 
 function delateItemCart(index,idTeddy){
-	//supprimer un teddy en fonction de son index dans teddyArray
+//supprimer un teddy en fonction de son index dans teddyArray
 	console.log("index",index)
 	console.log("idTeddy",idTeddy)
-
+	
 	//on recupere  le teddy et on supprime
   console.log("fonction  shopping cart",Object.values(shoppingCart));
    console.log("fonction Teddy avant sup",Object.values(shoppingCart)[index])
    console.log("fonction Teddy avant sup",shoppingCart[idTeddy])
   	 delete shoppingCart[idTeddy]
- 	  console.log("fonction Teddy apres sup",shoppingCart)
+ 	console.log("fonction Teddy apres sup",shoppingCart)
   // on vide le localStorage
- localStorage.removeItem("shoppingCart");
-   //on met a jour le localStorage
-	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;
-//    // on met a jour le prix
-	  totalCartPrice ()
-	  
-// mettre a jour la qte span cart quand on delate un item
-	  
+	localStorage.removeItem("shoppingCart");
+	localStorage.removeItem("cart");
+ // on met a jour le prix et qte
+      updateCartNumbers()
+      totalCartPrice ()
 
+   //on met a jour le localStorage
+	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;    // on met a jour le prix
+	 
   // on recharge la page 
  	 window.location.reload()
  
@@ -121,6 +122,20 @@ function totalCartPrice (){
 		totalCart += cartQte * cartprice
 	 localStorage.setItem('totalCart',JSON.stringify(totalCart) );
  }
+}
+
+function updateCartNumbers(){
+// on vide le loca	l storage
+// on definit la variable pour stocker le soustotal des qte de produit
+	let number = 0 
+//on convertit shopping cart en array
+	let arrayNumber = Object.values(shoppingCart);
+// on compte le nombre de qte ds le tableau et on met a jour number
+		for( let i=0 ;i<arrayNumber.length; i++){
+		number +=arrayNumber[i].qte 
+		}
+ 	localStorage.setItem('cartQte',JSON.stringify(number) )
+
 }
 
 
