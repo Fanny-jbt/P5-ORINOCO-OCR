@@ -18,20 +18,20 @@ let tableTitle=document.getElementById("tableTitle") // h2
 let orderModal = document.getElementById('orderModal')// modal de confirmation de commande
 
 //variables info clients a vérifier
-let fristName = document.getElementById("inputFristName").value;
-let lastName= document.getElementById("inputLastName").value;
-let address = document.getElementById("inputAddress").value;
-let zip = document.getElementById("inputZip").value;
-let city = document.getElementById("inputCity").value;
-let email = document.getElementById("InputMail").value;
+let fristName = document.getElementById("inputFristName");
+let lastName= document.getElementById("inputLastName");
+let address = document.getElementById("inputAddress");
+let zip = document.getElementById("inputZip");
+let city = document.getElementById("inputCity");
+let email = document.getElementById("InputMail");
 
 
 
 function showCart(){
 //au chargement de la page génerer dynamiquement le panier si shoppingcart est plein sinon on affiche panier vide avec bouton de retour a teddiesHome.html
-onloadcartNumbers()
-		if (!shoppingCart || Object.keys( shoppingCart).length == 0 ) {
-			// on masque le cart le formulaire et son bouton et on affiche un retour à la page des produits
+	onloadcartNumbers()
+		if (shoppingCart && Object.keys(shoppingCart).length <= 0 || !shoppingCart ) {
+			// si shoppingcart est vide on masque le cart le formulaire et son bouton et on affiche un retour à la page des produits
 			
 			tableTitle.style.display = "none";
 			tableCart.style.display = "none";
@@ -52,14 +52,16 @@ onloadcartNumbers()
 			a.setAttribute('role','button');
 			a.textContent = "Continuer mes achats";
 
-		 	}else{
-		// 		if (shoppingCart){
-		 			totalCartPrice ();// total price du panier
-					 createTableCart();  //sinon afficher le panier
-					 
-		 		}
+			 }else{
+				totalCartPrice ();// total price du panier
+				if(shoppingCart){
+					createTableCart();  //afficher le panier
+
+				}
+			 }
+			  
 		
-		// }
+		 
 }
 showCart()
 
@@ -69,11 +71,11 @@ showCart()
  let bntDelated = document.querySelectorAll('.bntDelated') //boutons supprimer
  for (i=0 ;i<bntDelated.length ; i++ ){
 	bntDelated[i].addEventListener("click", function(){ // au clic sur sup on suprimer le teddy coorepondant dans le shopping cart
-			let index = Array.from(bntDelated).indexOf(event.target) ;
-			console.log("click pour suprimer envoi l'index, ",index);
-			 let idTeddy =Object.keys(shoppingCart)[index];
-			 console.log("click pour suprimer envoi l'idteddy ",idTeddy);
-			delateItemCart(index,idTeddy);
+		let index = Array.from(bntDelated).indexOf(event.target) ;
+		console.log("click pour suprimer envoi l'index, ",index);
+		let idTeddy =Object.keys(shoppingCart)[index];
+		console.log("click pour suprimer envoi l'idteddy ",idTeddy);
+	    delateItemCart(idTeddy);
 
 			})
  }
@@ -82,36 +84,28 @@ showCart()
 // au clic sur le btn envoyer la commande
 btnCartSend.addEventListener('click', function(){
 	checkInput();// on verifie le format des input
-	sendToApi(); // on envoi les donnees a l'api et on recuperer le num de commande
+	
+	
+	//sendToApi(); // on envoi les donnees a l'api et on recuperer le num de commande
 	//si tout est ok on affiche le modal avec un num de commande et le prix total
 	
     //window.location="confirm.html "
 })
 
-function delateItemCart(index,idTeddy){
+function delateItemCart(idTeddy){
 //supprimer un teddy en fonction de son index dans teddyArray
-	console.log("index",index)
-	console.log("idTeddy",idTeddy)
-	
-	//on recupere  le teddy et on supprime
-  console.log("fonction  shopping cart",Object.values(shoppingCart));
-   console.log("fonction Teddy avant sup",Object.values(shoppingCart)[index])
-   console.log("fonction Teddy avant sup",shoppingCart[idTeddy])
-  	 delete shoppingCart[idTeddy]
- 	console.log("fonction Teddy apres sup",shoppingCart)
+	   delete shoppingCart[idTeddy];
+	   
   // on vide le localStorage
 	localStorage.removeItem("shoppingCart");
-	localStorage.removeItem("cart");
- // on met a jour le prix et qte
-      updateCartNumbers()
-      totalCartPrice ()
 
+  // on met a jour le prix et qte
+      updateCartNumbers();
+      totalCartPrice ();
    //on met a jour le localStorage
-	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;    // on met a jour le prix
-	 
+	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;   
   // on recharge la page 
  	 window.location.reload()
- 
  }
 
 function totalCartPrice (){
@@ -125,17 +119,16 @@ function totalCartPrice (){
 }
 
 function updateCartNumbers(){
-// on vide le loca	l storage
-// on definit la variable pour stocker le soustotal des qte de produit
+// on met a jour les qte de teddy apres suppression
+	localStorage.removeItem("cart");
 	let number = 0 
-//on convertit shopping cart en array
+//on convertit shopping cart en array 
 	let arrayNumber = Object.values(shoppingCart);
 // on compte le nombre de qte ds le tableau et on met a jour number
 		for( let i=0 ;i<arrayNumber.length; i++){
 		number +=arrayNumber[i].qte 
 		}
  	localStorage.setItem('cartQte',JSON.stringify(number) )
-
 }
 
 
@@ -228,27 +221,31 @@ function createTableCart(){// on affiche dynamiquement le panier sous forme de t
 
 function checkInput(){
 // on verifie si les champs sont remplit sionon on affiche un messge d'alerte
-     if (fristName.length === 0){
- 	   	return alert("Merci de renseigner votre prénom");
+	console.log("zip.length",zip.value.length)
+
+
+	if (fristName.value === ""){
+			
+			return alert("Merci de renseigner votre prénom");
 	 }
-	  if(lastName.length === 0){
- 	  	return alert("Merci de renseigner votre nom");
-	 }
-	 if(address.length === 0){
-     	return alert("Merci de renseigner votre adresse");
-	 }
-	 if(zip.length !== 5){
-     	return alert("Merci de renseigner votre code postal");
-	 }
-	 if(city.length === 0){
-	 	return alert("Merci de renseigner votre ville");
-	 }
-	  if(email.length === 0){
-     	return alert("Merci de renseigner votre email ");
-     }
+		if(lastName.value === ""){
+			return alert("Merci de renseigner votre nom");
+		}
+			if(address.value === ""){
+				return alert("Merci de renseigner votre adresse");
+			}
+				if(zip.value.length != 5  ){
+					return alert("Merci de renseigner votre code postal");
+				}
+					if(city.value === ""){
+						return alert("Merci de renseigner votre ville");
+					}
+						if(email.value === ""){
+							return alert("Merci de renseigner votre email ");
+						}
 
 		 console.log("toutes les donnees clients sont ok")
-		 //Si toutes les inputs saisies sont valides, renvoie l'objet contact à cartInformation
+		
      }
 
 
