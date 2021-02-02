@@ -32,7 +32,6 @@ function showCart(){
 	onloadcartNumbers()
 		if (shoppingCart && Object.keys(shoppingCart).length <= 0 || !shoppingCart ) {
 			// si shoppingcart est vide on masque le cart le formulaire et son bouton et on affiche un retour à la page des produits
-			
 			tableTitle.style.display = "none";
 			tableCart.style.display = "none";
 			form.style.display = "none";
@@ -58,16 +57,12 @@ function showCart(){
 					createTableCart();  //afficher le panier
 
 				}
-			 }
-			  
-		
-		 
+			 } 
 }
 showCart()
 
 
-
-// on fait une boucle pour acceder à tous les boutons supprimer
+// on fait une boucle pour accèder à tous les boutons supprimer
  let bntDelated = document.querySelectorAll('.bntDelated') //boutons supprimer
  for (i=0 ;i<bntDelated.length ; i++ ){
 	bntDelated[i].addEventListener("click", function(){ // au clic sur sup on suprimer le teddy coorepondant dans le shopping cart
@@ -76,38 +71,31 @@ showCart()
 		let idTeddy =Object.keys(shoppingCart)[index];
 		console.log("click pour suprimer envoi l'idteddy ",idTeddy);
 	    delateItemCart(idTeddy);
-
 			})
  }
 
 
-// au clic sur le btn envoyer la commande
+// au clic sur le btn envoyer la commande on verifie le format des input
 btnCartSend.addEventListener('click', function(){
-	
-	//checkInput();// on verifie le format des input
 	//si tout est ok on affiche le modal avec un num de commande et le prix total
-	if (checkInput() != true){
-		//sendToApi();
-		///window.location="confirm.html "	
-		console.log("send to api")
+	if (checkInput() == true){
+		sendToApi();
+		window.location="confirm.html "
 	}
-	console.log("check input false")
+
 })
 
 function delateItemCart(idTeddy){
 //supprimer un teddy en fonction de son index dans teddyArray
-	   delete shoppingCart[idTeddy];
-	   
-  // on vide le localStorage
+	delete shoppingCart[idTeddy];
 	localStorage.removeItem("shoppingCart");
-
   // on met a jour le prix et qte
-      updateCartNumbers();
-      totalCartPrice ();
+    updateCartNumbers();
+    totalCartPrice ();
    //on met a jour le localStorage
-	 localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;   
+	localStorage.setItem('shoppingCart',JSON.stringify(shoppingCart) ) ;   
   // on recharge la page 
- 	 window.location.reload()
+ 	window.location.reload()
  }
 
 function totalCartPrice (){
@@ -135,10 +123,8 @@ function updateCartNumbers(){
 
 
 function createTableCart(){// on affiche dynamiquement le panier sous forme de tableau
-
 // on boucle le shopping cart pour afficher une ligne par teddy
 	 for ( let teddy in shoppingCart ){
-
 		 let tr1 = document.createElement("tr");
 		 tableCartRows.appendChild(tr1);
 
@@ -223,8 +209,7 @@ function createTableCart(){// on affiche dynamiquement le panier sous forme de t
 
 function checkInput(){
 // on verifie si les champs sont remplit sionon on affiche un messge d'alerte
-	
-let check = true;
+let check = "";	
 	if (fristName.value === ""){
 			 alert("Merci de renseigner votre prénom");
 			 fristName.focus();
@@ -255,7 +240,7 @@ let check = true;
 							 email.focus();
 							  return check = false;
 						}
-				
+		return check = true
      }
 
 
@@ -276,19 +261,16 @@ function sendToApi(){
 
 // creer un tableau pour envoyer uniquement les ID des teddy
 	//recupérer le shoppingCart
-
     let apiCart =JSON.parse(localStorage.getItem("shoppingCart")) ;
     console.log("apiCart",apiCart);
     let apiCartArray = []; // tableau des id des teddy
-     //on boucle l'objet apicart pour recupere les ID
+     //on boucle l'objet apicart pour recupéré les ID
     for (let teddy in apiCart){
         apiCart[teddy].id
         console.log("apiCart[teddy].id ",apiCart[teddy].id )
         apiCartArray.push(apiCart[teddy].id)
         console.log("send api id",apiCartArray)
     }
-
-
 
 // POST API
 	 fetch("http://localhost:3000/api/teddies/order", {
@@ -317,7 +299,7 @@ function sendToApi(){
 }
 
 function onloadcartNumbers(){
-  //on recupere la qte stocké dans le local storage et on met a jour la span cart
+  //on recupère la qte stockée dans le localstorage et on met à jour la span cart
   let productSpan = document.getElementById("cartNumber");// on selectionne le badge qui contient les qté
   let productQte = localStorage.getItem("cartQte");
   productQte=parseInt(productQte);//on convertit le string en number 
@@ -325,7 +307,6 @@ function onloadcartNumbers(){
   if(productQte){
         productSpan.textContent=productQte;
 	  }
-	 // mettre a jour la qte quand on delate un item
 }
 
   
