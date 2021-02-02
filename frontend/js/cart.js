@@ -83,13 +83,15 @@ showCart()
 
 // au clic sur le btn envoyer la commande
 btnCartSend.addEventListener('click', function(){
-	checkInput();// on verifie le format des input
 	
-	
-	//sendToApi(); // on envoi les donnees a l'api et on recuperer le num de commande
+	//checkInput();// on verifie le format des input
 	//si tout est ok on affiche le modal avec un num de commande et le prix total
-	
-    //window.location="confirm.html "
+	if (checkInput() != true){
+		//sendToApi();
+		///window.location="confirm.html "	
+		console.log("send to api")
+	}
+	console.log("check input false")
 })
 
 function delateItemCart(idTeddy){
@@ -221,31 +223,39 @@ function createTableCart(){// on affiche dynamiquement le panier sous forme de t
 
 function checkInput(){
 // on verifie si les champs sont remplit sionon on affiche un messge d'alerte
-	console.log("zip.length",zip.value.length)
-
-
+	
+let check = true;
 	if (fristName.value === ""){
-			
-			return alert("Merci de renseigner votre prénom");
+			 alert("Merci de renseigner votre prénom");
+			 fristName.focus();
+			 return check = false;
 	 }
 		if(lastName.value === ""){
-			return alert("Merci de renseigner votre nom");
+			 alert("Merci de renseigner votre nom");
+			 lastName.focus();
+			  return check = false;
 		}
 			if(address.value === ""){
-				return alert("Merci de renseigner votre adresse");
+				 alert("Merci de renseigner votre adresse");
+				 address.focus();
+				  return check = false;
 			}
 				if(zip.value.length != 5  ){
-					return alert("Merci de renseigner votre code postal");
+					 alert("Merci de renseigner votre code postal");
+					 zip.focus();
+					 return  check = false;
 				}
 					if(city.value === ""){
-						return alert("Merci de renseigner votre ville");
+						 alert("Merci de renseigner votre ville");
+						 city.focus();
+						 return  check = false;
 					}
 						if(email.value === ""){
-							return alert("Merci de renseigner votre email ");
+							 alert("Merci de renseigner votre email ");
+							 email.focus();
+							  return check = false;
 						}
-
-		 console.log("toutes les donnees clients sont ok")
-		
+				
      }
 
 
@@ -278,7 +288,7 @@ function sendToApi(){
         console.log("send api id",apiCartArray)
     }
 
-//...separer ici et mettre en condition le haut dans une nouvelle fonction
+
 
 // POST API
 	 fetch("http://localhost:3000/api/teddies/order", {
@@ -305,8 +315,6 @@ function sendToApi(){
 	   })
 	   .catch((error) => console.log("erreur de type : ", error));
 }
-
-
 
 function onloadcartNumbers(){
   //on recupere la qte stocké dans le local storage et on met a jour la span cart
