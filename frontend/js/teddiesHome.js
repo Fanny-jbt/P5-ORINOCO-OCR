@@ -73,7 +73,7 @@ function addTeddiescard(datas){//Modifier le dom avec les données api et géné
   }
 }
 function onloadcartNumbers(){
-  //on recupere la qte stocké dans le local storage et on met a jour la span cart 
+  //on recupere la qte stockée dans le localstorage et on met à jour la span cart 
   let productSpan = document.getElementById("cartNumber");// on selectionne le badge qui contient les qté
   let productQte = localStorage.getItem("cartQte");
   productQte=parseInt(productQte);//on convertit le string en number 

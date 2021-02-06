@@ -208,7 +208,7 @@ function createTableCart(){// on affiche dynamiquement le panier sous forme de t
 
 
 function checkInput(){
-// on verifie si les champs sont remplit sionon on affiche un messge d'alerte
+// on verifie si les champs sont remplit sinon on affiche un messge d'alerte
 let check = "";	
 	if (fristName.value === ""){
 			 alert("Merci de renseigner votre prénom");
