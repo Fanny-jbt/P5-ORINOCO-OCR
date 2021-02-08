@@ -80,7 +80,8 @@ btnCartSend.addEventListener('click', function(){
 	//si tout est ok on affiche le modal avec un num de commande et le prix total
 	if (checkInput() == true){
 		sendToApi();
-		window.location="confirm.html "
+	
+		
 	}
 
 })
@@ -293,7 +294,9 @@ function sendToApi(){
 	 	}
 	   })
 	   .then((data) => {
+		   console.log('data',data)
 	 	localStorage.setItem("orderInfos", JSON.stringify(data));
+		 window.location="confirm.html ";
 	   })
 	   .catch((error) => console.log("erreur de type : ", error));
 }

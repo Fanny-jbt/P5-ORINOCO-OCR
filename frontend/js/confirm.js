@@ -6,6 +6,7 @@ console.log('cartApi',cartApi)
 const orderModal = document.getElementById("modalText");
 
 
+
 //boite modal 
 let p1 = document.createElement('p');
 orderModal.appendChild(p1);
