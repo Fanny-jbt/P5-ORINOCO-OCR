@@ -211,6 +211,8 @@ function createTableCart(){// on affiche dynamiquement le panier sous forme de t
 function checkInput(){
 // on verifie si les champs sont remplit sinon on affiche un messge d'alerte
 let check = "";	
+let regexEmail = /^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$/ //regex qui gère le format de l'email
+
 	if (fristName.value === ""){
 			 alert("Merci de renseigner votre prénom");
 			 fristName.focus();
@@ -236,8 +238,8 @@ let check = "";
 						 city.focus();
 						 return  check = false;
 					}
-						if(email.value === ""){
-							 alert("Merci de renseigner votre email ");
+						if(email.value === "" || !regexEmail.test(email.value)){
+							 alert("Merci de verifier votre email");
 							 email.focus();
 							  return check = false;
 						}
