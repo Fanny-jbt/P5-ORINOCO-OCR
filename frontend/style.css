@@ -96,3 +96,17 @@ box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
 border-radius: 5px;
 text-align: center;
 }
+
+.emptyCart__title {
+  margin: 20px; 
+  text-align:center ;
+}
+
+.emptyCart__content {
+  padding: 20px; 
+}
+
+.table, .form {
+padding: 40px 0; 
+
+}

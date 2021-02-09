@@ -39,13 +39,16 @@ function showCart(){
 
 			let h2 = document.createElement("h2");
 			table.appendChild(h2);
+			h2.setAttribute('class','emptyCart__title');
 			h2.textContent ="Votre panier est vide ";
+
 			let p = document.createElement("p");
 			table.appendChild(p);
+			p.setAttribute('class','emptyCart__content');
 			p.textContent ="Faites un petit tour dans nos boutiques et laissez-vous tenter";
 
 			var a = document.createElement("a");
-			p.appendChild(a);
+			table.appendChild(a);
 			a.setAttribute('class','btn btn-secondary btn-lg btn-block');
 			a.setAttribute('href','teddiesHome.html');
 			a.setAttribute('role','button');
